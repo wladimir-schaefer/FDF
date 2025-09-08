@@ -20,7 +20,6 @@ void	get_dimensions(t_map *map, char *file)
 	int		fd;
 	int		tokens;
 	char	*line;
-	char	**split;
 
 	map->height = 0;
 	fd = open(file, O_RDONLY);
@@ -28,17 +27,12 @@ void	get_dimensions(t_map *map, char *file)
 		error(map, "Can't read the file");
 	while ((line = get_next_line(fd)))
 	{
-		line = ft_strtrim(line, " ");
-		split = ft_split(line, ' ');
-		if (!split)
-			error(map, "Split failed");
-		tokens = count_tokens(split);
-		printf("Line %d: tokens=%d\n", map->height + 1, tokens);
+		tokens = count_tokens_in_string(line, ' ');
+		// printf("Line %d: tokens=%d\n", map->height + 1, tokens);
 		if (map->height == 0)
 			map->width = tokens;
 		else if (tokens != map->width)
 			error(map, "Different lengths of rows");
-		free_split(split);
 		free(line);
 		map->height++;
 	}
@@ -52,7 +46,7 @@ void	allocate_array(t_map *map)
 		error(map, "Malloc failed for rows");
 }
 
-void	fill_array(t_map *map,char *file)
+void	fill_array(t_map *map, char *file)
 {
 	int		fd;
 	int		y;
@@ -65,7 +59,6 @@ void	fill_array(t_map *map,char *file)
 	y = 0;
 	while ((line = get_next_line(fd)))
 	{
-		line = ft_strtrim(line, " ");
 		split = ft_split(line, ' ');
 		if (!split)
 			error(map, "Split failed");
@@ -105,10 +98,10 @@ int	*char_arr_to_int_arr(char **split, int width)
 	return (arr);
 }
 
-int	count_tokens(char **split)
+size_t	count_tokens(char **split)
 {
-	int	count;
-	int	i;
+	size_t	count;
+	size_t	i;
 
 	count = 0;
 	i = 0;
@@ -117,6 +110,27 @@ int	count_tokens(char **split)
 		if (split[i][0] != '\0')
 			count++;
 		i++;
+	}
+	return (count);
+}
+
+size_t	count_tokens_in_string(char const *s, char c)
+{
+	size_t	count;
+	size_t	in_word;
+
+	in_word = 0;
+	count = 0;
+	while (ft_isprint(*s))
+	{
+		if (*s != c && in_word == 0)
+		{
+			in_word = 1;
+			count++;
+		}
+		if (*s == c)
+			in_word = 0;
+		s++;
 	}
 	return (count);
 }
@@ -154,3 +168,33 @@ void	free_map(t_map *map)
 	}
 	free(map);
 }
+
+// void	get_dimensions(t_map *map, char *file)
+// {
+// 	int		fd;
+// 	int		tokens;
+// 	char	*line;
+// 	char	**split;
+
+// 	map->height = 0;
+// 	fd = open(file, O_RDONLY);
+// 	if (fd < 0)
+// 		error(map, "Can't read the file");
+// 	while ((line = get_next_line(fd)))
+// 	{
+// 		line = ft_strtrim(line, " \n");
+// 		split = ft_split(line, ' ');
+// 		if (!split)
+// 			error(map, "Split failed");
+// 		tokens = count_tokens(split);
+// 		printf("Line %d: tokens=%d\n", map->height + 1, tokens);
+// 		if (map->height == 0)
+// 			map->width = tokens;
+// 		else if (tokens != map->width)
+// 			error(map, "Different lengths of rows");
+// 		free_split(split);
+// 		free(line);
+// 		map->height++;
+// 	}
+// 	close(fd);
+// }

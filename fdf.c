@@ -16,12 +16,12 @@ int	main(int argc, char **argv)
 	mlx_loop(mlx);
 
 	// Test print
-	for (int y = 0; y < map->height; y++)
-	{
-		for (int x = 0; x < map->width; x++)
-			printf("%3d ", map->values[y][x]);
-		printf("\n");
-	}
+	// for (int y = 0; y < map->height; y++)
+	// {
+	// 	for (int x = 0; x < map->width; x++)
+	// 		printf("%3d ", map->values[y][x]);
+	// 	printf("\n");
+	// }
 
 	free_map(map);
 	return (0);
