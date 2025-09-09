@@ -35,6 +35,19 @@ int	main(int argc, char **argv)
 void	error(t_map *map, char *error_message)
 {
 	ft_printf("%s\n", error_message);
-	free_map(map);
+	if (map)
+		free_map(map);
 	exit (1);
+}
+void	error_str(char *str, char *error_message)
+{
+	ft_printf("%s\n", error_message);
+	if (str)
+		free(str);
+	// exit (1);
+}
+void	error_split(t_map *map, char **split)
+{
+	free_split(split);
+	error(map, "Malloc failed for row");
 }

@@ -1,5 +1,5 @@
 NAME    = fdf
-SRC     = start.c fdf.c
+SRC     = start.c start_utils.c fdf.c
 OBJ     = $(SRC:.c=.o)
 
 # Paths

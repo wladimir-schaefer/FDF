@@ -1,10 +1,10 @@
 #include "fdf.h"
-#include <stdio.h>
 
 t_map	*get_map(char *file)
 {
-	t_map	*map = NULL;
+	t_map	*map;
 
+	map = NULL;
 	map = malloc(sizeof(t_map));
 	if (!map)
 		error(map, "Malloc failed for map struct");
@@ -20,23 +20,28 @@ void	get_dimensions(t_map *map, char *file)
 	int		fd;
 	int		tokens;
 	char	*line;
+	int		diff_arrow;
 
 	map->height = 0;
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		error(map, "Can't read the file");
-	while ((line = get_next_line(fd)))
+	diff_arrow = 0;
+	line = get_next_line(fd);
+	while (line)
 	{
 		tokens = count_tokens_in_string(line, ' ');
-		// printf("Line %d: tokens=%d\n", map->height + 1, tokens);
-		if (map->height == 0)
-			map->width = tokens;
-		else if (tokens != map->width)
-			error(map, "Different lengths of rows");
+		if (!check_tokens(map, tokens))
+			diff_arrow++;
 		free(line);
 		map->height++;
+		line = get_next_line(fd);
 	}
 	close(fd);
+	if (map->height == 0 || map->width == 0)
+		error(map, "Empty map");
+	if (diff_arrow)
+		error(map, "Different lengths of rows");
 }
 
 void	allocate_array(t_map *map)
@@ -57,17 +62,17 @@ void	fill_array(t_map *map, char *file)
 	if (fd < 0)
 		error(map, "Can't read the file");
 	y = 0;
-	while ((line = get_next_line(fd)))
+	while (1)
 	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
 		split = ft_split(line, ' ');
 		if (!split)
 			error(map, "Split failed");
 		map->values[y] = char_arr_to_int_arr(split, map->width);
 		if (!map->values[y])
-		{
-			free_split(split);
-			error(map, "Malloc failed for row");
-		}
+			error_split(map, split);
 		free(line);
 		free_split(split);
 		y++;
@@ -98,76 +103,6 @@ int	*char_arr_to_int_arr(char **split, int width)
 	return (arr);
 }
 
-size_t	count_tokens(char **split)
-{
-	size_t	count;
-	size_t	i;
-
-	count = 0;
-	i = 0;
-	while (split[i])
-	{
-		if (split[i][0] != '\0')
-			count++;
-		i++;
-	}
-	return (count);
-}
-
-size_t	count_tokens_in_string(char const *s, char c)
-{
-	size_t	count;
-	size_t	in_word;
-
-	in_word = 0;
-	count = 0;
-	while (ft_isprint(*s))
-	{
-		if (*s != c && in_word == 0)
-		{
-			in_word = 1;
-			count++;
-		}
-		if (*s == c)
-			in_word = 0;
-		s++;
-	}
-	return (count);
-}
-
-void	free_split(char **split)
-{
-	int	i;
-
-	if (!split)
-		return ;
-	i = 0;
-	while (split[i])
-	{
-		free(split[i]);
-		i++;
-	}
-	free(split);
-}
-
-void	free_map(t_map *map)
-{
-	int y;
-
-	if (!map)
-		return;
-	if (map->values)
-	{
-		y = 0;
-		while (y < map->height)
-		{
-			free(map->values[y]);
-			y++;
-		}
-		free(map->values);
-	}
-	free(map);
-}
 
 // void	get_dimensions(t_map *map, char *file)
 // {
