@@ -1,5 +1,5 @@
 NAME    = fdf
-SRC     = start.c start_utils.c fdf.c
+SRC     = get_map.c get_map_utils.c fdf.c
 OBJ     = $(SRC:.c=.o)
 
 # Paths
@@ -10,7 +10,7 @@ LIBFT_LIB = $(LIBFT_DIR)/libft.a
 
 # Compiler & flags
 CC      = cc
-CFLAGS  = -Wall -Wextra -Werror -I$(MLX_DIR) -I$(LIBFT_DIR)
+CFLAGS  = -Wall -Wextra -Werror -g -I$(MLX_DIR) -I$(LIBFT_DIR)
 LDFLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
 all: $(NAME)
