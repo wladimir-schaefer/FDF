@@ -6,7 +6,7 @@
 /*   By: wschafer <wschafer@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 14:07:35 by wschafer          #+#    #+#             */
-/*   Updated: 2025/09/10 19:07:15 by wschafer         ###   ########.fr       */
+/*   Updated: 2025/09/11 15:38:47 by wschafer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,9 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		error(map, "Wrong number of arguments");
 	map = get_map(argv[1]);
+	draw(map);
 	
-	map->mlx = mlx_init();
-	map->mlx_win = mlx_new_window(map->mlx, 1920, 1080, "FDF");
-	map->img = mlx_new_image(map->mlx, 1920, 1080);
-	map->addr = mlx_get_data_addr(map->img, &map->bits_per_pixel, &map->line_length,
-								&map->endian);
-	my_mlx_pixel_put(map, 100, 100, 0x00FF0000);
-	mlx_put_image_to_window(map->mlx, map->mlx_win, map->img, 0, 0);
-	mlx_key_hook(map->mlx_win, key_handler, map);
-	mlx_hook(map->mlx_win, 17, 0, close_handler, map);
-	mlx_loop(map->mlx);
+
 
 	free_map(map);
 	return (0);

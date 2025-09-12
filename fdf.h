@@ -6,12 +6,16 @@
 /*   By: wschafer <wschafer@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 14:17:32 by wschafer          #+#    #+#             */
-/*   Updated: 2025/09/10 18:55:10 by wschafer         ###   ########.fr       */
+/*   Updated: 2025/09/12 16:31:43 by wschafer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
+
+#ifndef M_PI
+# define M_PI 3.14159265358979323846
+#endif
 
 # include "mlx.h"
 # include "libft/libft.h"
@@ -34,7 +38,21 @@ typedef struct s_map
 	int		endian;
 }	t_map;
 
+// typedef struct s_point3d
+// {
+// 	int x;
+// 	int y;
+// 	int z;
+// }	t_point3d;
+
+typedef struct s_point2d
+{
+	int x;
+	int y;
+}	t_point2d;
+
 int		main(int argc, char **argv);
+void	draw(t_map *map);
 void	error(t_map *map, char *error_message);
 void	error_str(char *str, char *error_message);
 void	error_split(t_map *map, char **split);
