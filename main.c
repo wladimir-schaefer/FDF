@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wschafer <wschafer@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 14:07:35 by wschafer          #+#    #+#             */
-/*   Updated: 2025/09/11 15:38:47 by wschafer         ###   ########.fr       */
+/*   Updated: 2025/09/13 10:25:03 by wschafer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,31 +29,6 @@ int	main(int argc, char **argv)
 	return (0);
 
 	// exit(0);
-}
-
-void	my_mlx_pixel_put(t_map *map, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = map->addr + (y * map->line_length + x * (map->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
-
-int	key_handler(int keycode, t_map *map)
-{
-	if (keycode == 65307)
-	{
-		mlx_destroy_window(map->mlx, map->mlx_win);
-		exit(0);
-	}
-	return (0);
-}
-
-int	close_handler(t_map *map)
-{
-	mlx_destroy_window(map->mlx, map->mlx_win);
-	exit(0);
-	return (0);
 }
 
 void	error(t_map *map, char *error_message)
