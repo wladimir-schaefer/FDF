@@ -2,47 +2,42 @@
 
 void	draw_line(t_map *map, t_point2d p1, t_point2d p2, int color)
 {
-	int dx;
-	int dy;
-	int sx;
-	int sy;
-	int err;
+	t_line line;
 
-	dx = abs(p2.x - p1.x);
-	dy = -abs(p2.y - p1.y);
-	sx = get_step(p1.x, p2.x);
-	sy = get_step(p1.y, p2.y);
-	err = dx + dy;
+	line = init_line(p1, p2);
 	while (1)
 	{
 		my_mlx_pixel_put(map, p1.x, p1.y, color);
 		if (p1.x == p2.x && p1.y == p2.y)
 			break ;
-		update_err_and_step(&err, dx, dy, &p1, sx, sy);
+		line.e2 = 2 * line.err;
+		if (line.e2 >= line.dy)
+		{
+			line.err += line.dy;
+			p1.x += line.sx;
+		}
+		if (line.e2 <= line.dx)
+		{
+			line.err += line.dx;
+			p1.y += line.sy;
+		}
 	}
 }
 
-void	update_err_and_step(int *err, int dx, int dy, t_point2d *p, int sx, int sy)
+t_line	init_line(t_point2d p1, t_point2d p2)
 {
-	int e2;
+	t_line line;
 
-	e2 = 2 * (*err);
-	if (e2 >= dy)
-	{
-		*err += dy;
-		p->x += sx;
-	}
-	if (e2 <= dx)
-	{
-		*err += dx;
-		p->y += sy;
-	}
-}
-
-int	get_step(int a, int b)
-{
-	if (a < b)
-		return (1);
+	line.dx = abs(p2.x - p1.x);
+	if (p1.x < p2.x)
+		line.sx = 1;
 	else
-		return (-1);
+		line.sx = -1;
+	line.dy = -abs(p2.y - p1.y);
+	if (p1.y < p2.y)
+		line.sy = 1;
+	else
+		line.sy = -1;
+	line.err = line.dx + line.dy;
+	return (line);
 }

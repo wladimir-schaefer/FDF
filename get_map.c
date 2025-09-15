@@ -102,34 +102,3 @@ int	*char_arr_to_int_arr(char **split, int width)
 	}
 	return (arr);
 }
-
-
-// void	get_dimensions(t_map *map, char *file)
-// {
-// 	int		fd;
-// 	int		tokens;
-// 	char	*line;
-// 	char	**split;
-
-// 	map->height = 0;
-// 	fd = open(file, O_RDONLY);
-// 	if (fd < 0)
-// 		error(map, "Can't read the file");
-// 	while ((line = get_next_line(fd)))
-// 	{
-// 		line = ft_strtrim(line, " \n");
-// 		split = ft_split(line, ' ');
-// 		if (!split)
-// 			error(map, "Split failed");
-// 		tokens = count_tokens(split);
-// 		printf("Line %d: tokens=%d\n", map->height + 1, tokens);
-// 		if (map->height == 0)
-// 			map->width = tokens;
-// 		else if (tokens != map->width)
-// 			error(map, "Different lengths of rows");
-// 		free_split(split);
-// 		free(line);
-// 		map->height++;
-// 	}
-// 	close(fd);
-// }

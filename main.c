@@ -6,7 +6,7 @@
 /*   By: wschafer <wschafer@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 14:07:35 by wschafer          #+#    #+#             */
-/*   Updated: 2025/09/13 10:25:03 by wschafer         ###   ########.fr       */
+/*   Updated: 2025/09/15 15:22:15 by wschafer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,3 @@ void	error_split(t_map *map, char **split)
 	free_split(split);
 	error(map, "Malloc failed for row");
 }
-
-
-
-
-
-
-
-
-
-
-
-	// Test print
-	// for (int y = 0; y < map->height; y++)
-	// {
-	// 	for (int x = 0; x < map->width; x++)
-	// 		printf("%3d ", map->values[y][x]);
-	// 	printf("\n");
-	// }
