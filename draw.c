@@ -52,7 +52,6 @@ void	handle_point(t_map *map, int x, int y)
 	}
 }
 
-
 t_point2d	project_point(t_map *map, int x, int y, int z)
 {
 	t_point2d	p;

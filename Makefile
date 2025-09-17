@@ -1,5 +1,6 @@
 NAME    = fdf
-SRC     = main.c get_map.c get_map_utils.c draw.c draw_utils.c draw_line.c
+SRC     = main.c get_map.c get_map_utils.c get_map_utils_2.c \
+			draw.c draw_utils.c draw_line.c
 OBJ     = $(SRC:.c=.o)
 
 # Paths

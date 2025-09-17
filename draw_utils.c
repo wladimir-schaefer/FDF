@@ -14,6 +14,14 @@ int	key_handler(int keycode, t_map *map)
 	if (keycode == 65307)
 	{
 		mlx_destroy_window(map->mlx, map->mlx_win);
+		if (map->img)
+			mlx_destroy_image(map->mlx, map->img);
+		if (map->mlx)
+		{
+			mlx_destroy_display(map->mlx);
+			free(map->mlx);
+		}
+		free_map(map);
 		exit(0);
 	}
 	return (0);
@@ -22,6 +30,14 @@ int	key_handler(int keycode, t_map *map)
 int	close_handler(t_map *map)
 {
 	mlx_destroy_window(map->mlx, map->mlx_win);
+	if (map->img)
+		mlx_destroy_image(map->mlx, map->img);
+	if (map->mlx)
+		{
+			mlx_destroy_display(map->mlx);
+			free(map->mlx);
+		}
+	free_map(map);
 	exit(0);
 	return (0);
 }

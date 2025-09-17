@@ -6,7 +6,7 @@
 /*   By: wschafer <wschafer@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 14:17:32 by wschafer          #+#    #+#             */
-/*   Updated: 2025/09/15 16:18:49 by wschafer         ###   ########.fr       */
+/*   Updated: 2025/09/17 12:04:40 by wschafer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void	error_split(t_map *map, char **split);
 t_map	*get_map(char *file);
 void	get_dimensions(t_map *map, char *file);
 void	allocate_array(t_map *map);
+char	**get_clean_split(char *line, t_map *map);
 void	fill_array(t_map *map, char *file);
-int		*char_arr_to_int_arr(char **split, int width);
 
 //get_map_utils.c
 size_t	count_tokens(char **str);
@@ -80,6 +80,11 @@ size_t	count_tokens_in_string(char const *w, char c);
 void	free_split(char **split);
 void	free_map(t_map *map);
 int		check_tokens(t_map *map, int tokens);
+
+//get_map_utils_2.c
+int		*malloc_int_array(int width);
+int		fill_values(int *arr, char **split, int width);
+int		*char_arr_to_int_arr(char **split, int width);
 
 //draw.c
 void	draw(t_map *map);

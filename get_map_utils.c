@@ -23,18 +23,30 @@ size_t	count_tokens_in_string(char const *s, char c)
 
 	in_word = 0;
 	count = 0;
-	while (ft_isprint(*s))
+	while (*s != '\0' && *s != '\n')
 	{
 		if (*s != c && in_word == 0)
 		{
 			in_word = 1;
 			count++;
 		}
-		if (*s == c)
+		else if (*s == c)
 			in_word = 0;
 		s++;
 	}
 	return (count);
+}
+
+int	check_tokens(t_map *map, int tokens)
+{
+	if (map->height == 0)
+	{
+		map->width = tokens;
+		return (1);
+	}
+	else if (tokens != map->width)
+		return (0);
+	return (1);
 }
 
 void	free_split(char **split)
@@ -64,21 +76,12 @@ void	free_map(t_map *map)
 		while (y < map->height)
 		{
 			free(map->values[y]);
+			// ft_printf("Freed row %d\n", y);
 			y++;
 		}
 		free(map->values);
+		// ft_printf("Freed values array\n");
 	}
 	free(map);
-}
-
-int	check_tokens(t_map *map, int tokens)
-{
-	if (map->height == 0)
-	{
-		map->width = tokens;
-		return (1);
-	}
-	else if (tokens != map->width)
-		return (0);
-	return (1);
+	// ft_printf("Freed map struct\n");
 }
