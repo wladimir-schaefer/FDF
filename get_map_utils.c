@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_map_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wschafer <wschafer@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/17 13:43:49 by wschafer          #+#    #+#             */
+/*   Updated: 2025/09/17 13:43:54 by wschafer         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 size_t	count_tokens(char **split)
@@ -76,12 +88,9 @@ void	free_map(t_map *map)
 		while (y < map->height)
 		{
 			free(map->values[y]);
-			// ft_printf("Freed row %d\n", y);
 			y++;
 		}
 		free(map->values);
-		// ft_printf("Freed values array\n");
 	}
 	free(map);
-	// ft_printf("Freed map struct\n");
 }

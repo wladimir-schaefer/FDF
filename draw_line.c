@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_line.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wschafer <wschafer@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/17 13:53:30 by wschafer          #+#    #+#             */
+/*   Updated: 2025/09/17 13:54:03 by wschafer         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 void	draw_line(t_map *map, t_point2d p1, t_point2d p2, int color)
 {
-	t_line line;
+	t_line	line;
 
 	line = init_line(p1, p2);
 	while (1)
@@ -26,7 +38,7 @@ void	draw_line(t_map *map, t_point2d p1, t_point2d p2, int color)
 
 t_line	init_line(t_point2d p1, t_point2d p2)
 {
-	t_line line;
+	t_line	line;
 
 	line.dx = abs(p2.x - p1.x);
 	if (p1.x < p2.x)

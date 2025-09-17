@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_map.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wschafer <wschafer@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/17 13:44:56 by wschafer          #+#    #+#             */
+/*   Updated: 2025/09/17 13:45:18 by wschafer         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 t_map	*get_map(char *file)
@@ -94,118 +106,3 @@ void	fill_array(t_map *map, char *file)
 	}
 	close(fd);
 }
-
-
-
-
-// void	fill_array(t_map *map, char *file)
-// {
-// 	int		fd;
-// 	int		y;
-// 	char	*line;
-// 	char	**split;
-
-// 	fd = open(file, O_RDONLY);
-// 	if (fd < 0)
-// 		error(map, "Can't read the file");
-// 	y = 0;
-// 	while (1)
-// 	{
-// 		line = get_next_line(fd);
-// 		if (!line)
-// 			break ;
-// 		split = ft_split(line, ' ');
-// 		if (!split)
-// 			error(map, "Split failed");
-// //////////////////
-// 		int tokens = 0;
-// 		for (int i = 0; split[i]; i++)
-// 			if (split[i][0] != '\0')
-// 				tokens++;
-// 		if (tokens != map->width)
-// 			error_split(map, split);
-// /////////////////////
-// 		map->values[y] = char_arr_to_int_arr(split, map->width);
-// 		if (!map->values[y])
-// 			error_split(map, split);
-// 		free(line);
-// 		free_split(split);
-// 		y++;
-// 	}
-// 	close(fd);
-// }
-// void	fill_array(t_map *map, char *file)
-// {
-// 	int		fd;
-// 	int		y;
-// 	char	*line;
-// 	char	*trimmed;
-// 	char	**split;
-
-// 	fd = open(file, O_RDONLY);
-// 	if (fd < 0)
-// 		error(map, "Can't read the file");
-// 	y = 0;
-// 	while (1)
-// 	{
-// 		line = get_next_line(fd);
-// 		if (!line)
-// 			break ;
-// 		trimmed = ft_strtrim(line, " \n");  // <-- remove trailing spaces/newline
-// 		free(line);
-// 		if (!trimmed)
-// 			error(map, "Trim failed");
-
-// 		split = ft_split(trimmed, ' ');
-// 		free(trimmed);
-// 		if (!split)
-// 			error(map, "Split failed");
-
-// 		// Defensive: check tokens
-// 		if ((int)count_tokens(split) != map->width)
-// 			error_split(map, split);
-
-// 		map->values[y] = char_arr_to_int_arr(split, map->width);
-// 		if (!map->values[y])
-// 			error_split(map, split);
-
-// 		free_split(split);
-// 		y++;
-// 	}
-// 	close(fd);
-// }
-
-// int	*char_arr_to_int_arr(char **split, int width)
-// {
-// 	int	i;
-// 	int	j;
-// 	int	*arr;
-
-// 	arr = malloc(width * sizeof(int));
-// 	if (!arr)
-// 		return (NULL);
-// 	i = 0;
-// 	j = 0;
-// 	while (split[i])
-// 	{
-// 		if (split[i][0] != '\0')
-// 		{
-// 			if (j >= width)
-// 			{
-// 				free(arr);
-// 				return (NULL);
-// 			}
-// 			arr[j] = ft_atoi(split[i]);
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// ///////////////////
-// 	if (j != width) // Defensive: not enough tokens
-//     {
-//         free(arr);
-//         return (NULL);
-//     }
-// //////////////////
-// 	return (arr);
-// }

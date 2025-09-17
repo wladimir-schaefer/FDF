@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wschafer <wschafer@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/17 13:47:20 by wschafer          #+#    #+#             */
+/*   Updated: 2025/09/17 13:52:52 by wschafer         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 void	draw(t_map *map)
@@ -5,8 +17,8 @@ void	draw(t_map *map)
 	map->mlx = mlx_init();
 	map->mlx_win = mlx_new_window(map->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "FDF");
 	map->img = mlx_new_image(map->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-	map->addr = mlx_get_data_addr(map->img, &map->bits_per_pixel, &map->line_length,
-								&map->endian);
+	map->addr = mlx_get_data_addr(map->img, &map->bits_per_pixel,
+			&map->line_length, &map->endian);
 	mlx_loop_hook(map->mlx, draw_map, map);
 	mlx_key_hook(map->mlx_win, key_handler, map);
 	mlx_hook(map->mlx_win, 17, 0, close_handler, map);
@@ -36,8 +48,8 @@ int	draw_map(t_map *map)
 
 void	handle_point(t_map *map, int x, int y)
 {
-	t_point2d p1;
-	t_point2d p2;
+	t_point2d	p1;
+	t_point2d	p2;
 
 	p1 = project_point(map, x, y, map->values[y][x]);
 	if (x < map->width - 1)
@@ -57,11 +69,11 @@ t_point2d	project_point(t_map *map, int x, int y, int z)
 	t_point2d	p;
 	float		iso_x;
 	float		iso_y;
-	
-	iso_x = (x  * map->scale- y * map->scale) * cos(30 * M_PI / 180);
-	iso_y = (x * map->scale + y * map->scale) * sin(30 * M_PI / 180) - z * (map->scale / 2);
+
+	iso_x = (x * map->scale - y * map->scale) * cos(30 * M_PI / 180);
+	iso_y = (x * map->scale + y * map->scale) * sin(30 * M_PI / 180) 
+		- z * (map->scale / 2);
 	p.x = (int)iso_x + (WINDOW_WIDTH / 2);
 	p.y = (int)iso_y + (WINDOW_HEIGHT / 3.5);
 	return (p);
 }
-

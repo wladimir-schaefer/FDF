@@ -1,10 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wschafer <wschafer@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/17 13:54:26 by wschafer          #+#    #+#             */
+/*   Updated: 2025/09/17 13:59:20 by wschafer         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 void	my_mlx_pixel_put(t_map *map, int x, int y, int color)
 {
 	char	*dst;
+
 	if (x < 0 || x >= WINDOW_WIDTH || y < 0 || y >= WINDOW_HEIGHT)
-		return ; 
+		return ;
 	dst = map->addr + (y * map->line_length + x * (map->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
@@ -33,10 +46,10 @@ int	close_handler(t_map *map)
 	if (map->img)
 		mlx_destroy_image(map->mlx, map->img);
 	if (map->mlx)
-		{
-			mlx_destroy_display(map->mlx);
-			free(map->mlx);
-		}
+	{
+		mlx_destroy_display(map->mlx);
+		free(map->mlx);
+	}
 	free_map(map);
 	exit(0);
 	return (0);
@@ -57,16 +70,24 @@ void	get_scale(t_map *map)
 		map->scale = scale_y;
 }
 
-int get_max_z(t_map *map)
+int	get_max_z(t_map *map)
 {
 	int	y;
 	int	x;
 	int	max;
 
 	max = map->values[0][0];
-	for (y = 0; y < map->height; y++)
-		for (x = 0; x < map->width; x++)
+	y = 0;
+	while (y < map->height)
+	{
+		x = 0;
+		while (x < map->width)
+		{
 			if (map->values[y][x] > max)
 				max = map->values[y][x];
+			x++;
+		}
+		y++;
+	}
 	return (max);
 }
