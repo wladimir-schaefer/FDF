@@ -6,7 +6,7 @@
 /*   By: wschafer <wschafer@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 12:34:30 by wschafer          #+#    #+#             */
-/*   Updated: 2025/05/18 10:16:08 by wschafer         ###   ########.fr       */
+/*   Updated: 2025/09/17 17:13:19 by wschafer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
+//get_next_line
 char	*get_next_line(int fd);
 ssize_t	read_and_append(int fd, char **cache);
 char	*extract_line(char **cache, char *newline);
@@ -82,12 +83,13 @@ char	*ft_strdup(const char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*handle_read_result(int bytes, char **cache);
 
-int	ft_printf(const char *format, ...);
-int	print_str(const char *s);
-int	print_char(int i);
-int	print_pointer(void *p);
-int	print_nbr(int i);
-int	print_unsigned(unsigned int u);
-int	print_hex(unsigned int u, int uppercase);
+//ft_printf
+int		ft_printf(const char *format, ...);
+int		print_str(const char *s);
+int		print_char(int i);
+int		print_pointer(void *p);
+int		print_nbr(int i);
+int		print_unsigned(unsigned int u);
+int		print_hex(unsigned int u, int uppercase);
 
 #endif /* LIBFT_H */
